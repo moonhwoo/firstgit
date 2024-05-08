@@ -1,0 +1,53 @@
+package static2;
+
+public class MathArrayUtilsMain
+{
+    public static void main(String[] args) {
+        int[]values={1,2,3,4,5};
+        System.out.println("Sum="+MathArrayUtils.sum(values));
+        System.out.println("average="+MathArrayUtils.average(values));
+        System.out.println("min="+MathArrayUtils.min(values));
+        System.out.println("max="+MathArrayUtils.max(values));
+    }
+}
+package static2;
+
+public class MathArrayUtils {
+    private MathArrayUtils() {
+        //!!!!!private 인스턴스 생성을 막기위해 이렇게 씀(다른 사람들이 볼때 생성하지말라는 표시)!!!!오늘의 배워갈 내용(제한이 있는 코드가 잘 짠 코드이다)
+    }
+
+
+    public static int sum(int []values){
+        int sum1=0;
+        for(int value:values ){
+            sum1+=value;
+        }
+        return sum1;
+    }
+    public static double average(int []values){
+
+        return (double)sum(values)/values.length;
+    }
+    public static int min(int []values){
+        int min1=values[0];
+        for(int value:values ){
+            if(value<min1){
+                min1=value;
+            }
+
+        }
+        return min1;
+    }
+    public static int max(int []values){
+        int max1=values[0];
+        for(int value:values ){
+
+            if(value>max1){
+                max1=value;
+            }
+        }
+        return max1;
+    }
+
+}
