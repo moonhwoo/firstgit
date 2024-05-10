@@ -1,0 +1,49 @@
+//상속 관계를 사용하면 자식 클래스의 생성자에서 부모 클래스의 생성자를 반드시 호출해야한다.
+//단 부모 클래스에 기본 생성자가 정의되어 있다면 자식 생성자안에서 super() 생략가능!
+//없으면 무조건 써줘야함 (상속을 쓸때 생성자를 이용하면 무조건 super를쓴다)
+/*결과
+ClassA constructor
+ClassB constructor a=10 b=20
+ClassC constructor
+*/
+package extends1.access.super2;
+
+public class Super2Main {
+    public static void main(String[] args) {
+        ClassC classC = new ClassC();
+    }
+}
+======
+package extends1.access.super2;
+
+public class ClassA {
+
+    public ClassA(){
+         System.out.println("ClassA constructor");
+    }
+}
+======
+package extends1.access.super2;
+
+public class ClassB extends ClassA {
+    public ClassB(int a) {
+        super();//기본 생성자 생략 가능
+        System.out.println("ClassB constructor a="+a);
+
+    }
+    public ClassB(int a, int b) {
+        super();//기본 생성자 생략가능
+        System.out.println("ClassB constructor a="+a+" b="+b);
+    }
+}
+=======
+package extends1.access.super2;
+
+public class ClassC extends ClassB {
+    public ClassC() {
+        super(10,20);//ClassB의 생성자를 보면 기본 생성자가 생성되지 않음 그러므로 직접 정의를 해줘야함
+
+        System.out.println("ClassC constructor");
+    }
+
+}
