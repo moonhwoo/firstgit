@@ -1,0 +1,20 @@
+package poly.basic;
+
+public class CastingMain2 {
+    public static void main(String[] args) {
+        //부모 변수가 자식 인스턴스 참조(다형적 참조)
+        Parent poly=new Child();
+        //자식의 기능을 호출 불가
+        //poly.childMethod();
+
+        //다운캐스팅 (부모타입 ->자식타입) 강제로 내가 책임질게 실행해!!!
+        Child child=(Child)poly;//x001 ->강제로 부모타입을 자식타입으로 바꿈
+        child.childMethod();
+
+
+        //일시적 다운 캐스팅-해당 메서드를 호출하는 순간만 다운캐스팅
+        ((Child) poly).childMethod();//위의 다운캐스팅을 순간적으로 할수있음
+    }
+}
+//드는 의문==>왜 굳이?? 이걸 힘들게 써서 왜 코드를 늘리며 귀찮게 다운 캐스팅까지 써야할까?
+//=>뒤에 쓰는 이유가 나올것임
