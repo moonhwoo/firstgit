@@ -1,0 +1,50 @@
+package poly.basic;
+
+public class PolyMain {
+    //부모 변수가 부모 인스턴스 참조
+    public static void main(String[] args) {
+        System.out.println("Parent-> Parent");
+        Parent parent = new Parent();
+        parent.parentMethod();
+
+        //자식변수가 자식 인스턴스 참조
+        System.out.println("Child-> Child");
+        Child child = new Child();
+        child.parentMethod();
+        child.childMethod();
+
+
+        //!! 부모 변수가 자식 인스턴스 참조(다형적 참조)
+        System.out.println("Parent-> Child");
+        Parent poly =new Child();//자식을 부모에 대입한다.부모타입이 자식을 참조한다
+        poly.parentMethod();
+
+        //Child child1 = new Parent(); 안되는 코드 자식이 부모를 담을수 없음!!
+
+        //poly.childMethod(); 자식의 기능을 호출할수 없다
+        //==> 이때 필요한게 캐스팅이다
+        //==>굳이 왜써야하는건가? 불필요하지 않나??==>지금은 설명 하기 힘들지만
+        // 나중에 배우다보면 어마어마한 코드를 짤수 있는것을 알수있다
+
+
+    }
+}
+====
+package poly.basic;
+
+public class Parent {
+    public  void parentMethod(){
+        System.out.println("Parent.parentmethod");
+    }
+}
+====
+package poly.basic;
+
+public class Child extends Parent {
+
+    public void childMethod() {
+        System.out.println("Child.childMethod");
+    }
+}
+
+
