@@ -1,0 +1,62 @@
+/*다형적 참조를 처음에 쓰는 이유를 몰랐지만 같은 부류의 다른class들이 있을때 호출이나 추가하려면
+중복되는 코딩이 무수히 나오는데 이를 하나의 상위 클래스(예:동물(상위)=>소,강아지 ,고양이(하위))로
+묶어서 메소드 오버라이딩을 사용하면 코드의 중복 없이 사용가능하다
+*/
+package poly.ex2;
+
+public class AnimalSoundMain {
+    public static void main(String[] args) {
+        Dog dog = new Dog();
+        Cat cat = new Cat();
+        Cow cow = new Cow();
+        soundAnimal(dog);
+        soundAnimal(cat);
+        soundAnimal(cow);
+    }
+    private static void soundAnimal(Animal animal)
+    //****Animal animal이게 코드의 핵심임 
+     {
+        System.out.println("동물 소리 테스트 시작");
+        animal.sound();
+        System.out.println("동물 소리 테스트 끝");
+
+    }
+    //다 다른 타입이기때문에 매번 메서드나 코드를 쳐줘야된다
+    //=>그래서 상위 타입을 만들고 상속받아 메서드 오버라이딩을 해 사용
+}
+-======
+package poly.ex2;
+
+public class Animal {
+    public void sound(){
+        System.out.println("동물 울음 소리");
+    }
+}
+=====
+package poly.ex2;
+
+public class Cat extends Animal {
+
+    @Override
+    public void sound() {
+        super.sound();
+    }
+}
+====
+package poly.ex2;
+
+public class Cow extends Animal {
+    @Override
+    public void sound() {
+        super.sound();
+    }
+}
+====
+package poly.ex2;
+
+public class Dog extends Animal {
+    @Override
+    public void sound(){
+        System.out.println("멍멍");
+    }
+}
