@@ -1,0 +1,46 @@
+///다형적 참조를 쓰는이유(다형적 참조를 이용한 오버라이딩을 이용하면 엄청난 능력을 사용할수있다!! )
+package poly.overrinding;
+
+public class OverrindingMain {
+    public static void main(String[] args) {
+        //자식 변수가 자식 인스턴스 참조
+        Child child=new Child();
+        System.out.println("Child->Child");
+        System.out.println("value="+child.value);
+        child.method();
+        //부모 변수가 부모 인스턴스 참조
+        Parent parent=new Parent();
+        System.out.println("Parent->Parent");
+        System.out.println("value="+parent.value);
+        parent.method();
+
+        //부모변수가 자식인스턴스 참조(다형적참조)
+        Parent poly=new Child();
+        System.out.println("Parent->Child");
+        System.out.println("value="+poly.value);
+        poly.method();
+        //!!!메서드 오라이딩에서 기억해야할것은 오버라이딩 된 메서드가 항상 우선권을 가진다!
+        // 이를 이용해서 다형성의 위력을 쓸수있다
+    }
+}
+----
+package poly.overrinding;
+
+public class Parent {
+    public String value="parent";
+
+    public void method(){
+
+    }
+}
+------
+package poly.overrinding;
+
+public class Child extends Parent {
+    public String value="Child";
+
+    @Override//crtl+o 누르면 가능
+    public void method() {
+        System.out.println("Child Method");
+    }
+}
