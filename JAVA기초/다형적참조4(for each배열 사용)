@@ -1,0 +1,35 @@
+//배열과for each를 사용해서도가능!!
+//문제점이 있는데 
+//1. 부모class를 참조하는 경우 부모 클래스animal에는 내부 특별한 메서드가 없어 불러도 의미없음
+//2.다른 사람이 쓸떄 overrinding을 안하면 부모 클래스의 메서드 내용이 들어감
+//==>이를 해결하기 위한 방법!! abstract
+package poly.ex2;
+
+public class AnimalSoundMain2 {
+    public static void main(String[] args) {
+        /*Dog dog = new Dog();
+        Cat cat = new Cat();
+        Cow cow = new Cow(); */
+        //이 부분을 아래처럼 !!crtl+alt+N으로 한번에 쓸수 있음
+        Animal[] animalArr={new Dog(), new Cat(), new Cow()};
+
+        //변하지 않는 부분
+        for (Animal animal : animalArr) {
+            soundAnimal(animal);
+            //ctrl+alt+M으로
+            /*
+            System.out.println("동물 소리 테스트 시작");
+        animal.sound();
+        System.out.println("동물 소리 테스트 끝");
+        한번에 할수있음*/
+
+        }
+    }
+
+    private static void soundAnimal(Animal animal) {
+        System.out.println("동물 소리 테스트 시작");
+        animal.sound();
+        System.out.println("동물 소리 테스트 종료");
+    }
+
+}
