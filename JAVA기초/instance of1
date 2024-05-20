@@ -1,0 +1,68 @@
+package poly.basic;
+
+public class CastingMain5 {
+    public static void main(String[] args) {
+        Parent parent1=new Parent();
+        call(parent1);
+
+        Parent parent2=new Child();
+        call(parent2);
+
+
+    }
+    private  static void call(Parent parent)
+    {
+        if(parent instanceof Child){
+            //instancof는 오른쪽대상의 자시 타입을 왼쪽에서 참조하는 경우true를 반환함
+            //=>쉽게 말해 오른쪽에 있는 타입에 왼쪽에 있는 인스턴스 타입이 들어갈수 있음true
+            //위의 말 정리:Child= new parent인데 parent에 뭐가 들어오냐에 따라 가능 불가능 나옴
+
+            System.out.println("Child  인스턴스 맞습니 다");
+            Child child=(Child)parent;
+            child.childMethod();//다운 캐스팅 가능
+
+    }
+        else{
+            System.out.println("Child 인스턴스 아님");
+        }
+
+
+    }
+}
+
+/////
+package poly.basic;
+
+public class CastingMain6 {
+
+        public static void main(String[] args) {
+            Parent parent1=new Parent();
+            call(parent1);
+
+            Parent parent2=new Child();
+            call(parent2);
+
+
+        }
+        private  static void call(Parent parent)
+        {   parent.parentMethod();
+            //Child 인스터스인 걍우 ChildMethod()실행
+            /*if(parent instanceof Child){
+                System.out.println("Child  인스턴스 맞습니다");
+                Child child=(Child)parent;*/
+            if(parent instanceof Child child){
+                //아예 다운 캐스팅을 한번에 해버리는것도 가능
+                System.out.println("Child  인스턴스 맞습니다");
+                child.childMethod();
+
+            }
+            else{
+                System.out.println("Child 인스턴스 아님");
+            }
+
+
+        }
+    }
+
+
+
