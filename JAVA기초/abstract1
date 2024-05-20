@@ -1,0 +1,74 @@
+//abstract를 쓰는 이유
+/*!!! 다형적 참조4(주석에 써놓음) 
+조건:1.무조건 자식에서 오버라이딩을 써야한다
+2.abstract메서드에는 몸통 즉 {}가 없다
+3.abstract 를 쓰려면 class앞에 abstract를 써야한다 
+
+*/
+package poly.ex3;
+
+
+
+public class AbstractMain {
+    public static void main(String[] args) {
+        //추상클래스 생성 불가
+        //AbstractAnimal animal= new AbstractAnimal();
+
+        Dog dog=new Dog();
+        Cat cat = new Cat();
+        Caw caw = new Caw();
+
+        cat.sound();
+        cat.move();
+    }
+
+        private static void soundAnimal(AbstractAnimal animal) {
+            System.out.println("동물 소리 테스트 시작");
+            animal.sound();
+            System.out.println("동물 소리 테스트 끝");
+
+        }
+
+    }
+    ===
+    package poly.ex3;
+
+public abstract class AbstractAnimal {
+    public abstract void sound();
+
+    public void move(){
+        System.out.println("동물이 움직입니다");
+    }
+}
+===
+package poly.ex3;
+
+public class Cat extends AbstractAnimal{
+    @Override
+    public void sound() {
+        System.out.println("야옹");
+    }
+}
+==
+package poly.ex3;
+
+public class Caw extends AbstractAnimal{
+    @Override
+    public void sound() {
+        System.out.println("음메 ");
+    }
+}
+
+
+==package poly.ex3;
+
+public class Dog extends AbstractAnimal{
+
+    @Override
+    public void sound() {
+        System.out.println("멍멍");
+    }
+}
+
+    
+
