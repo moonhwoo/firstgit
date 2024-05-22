@@ -1,0 +1,45 @@
+//인터페이스는 다중상속이 가능한데 그이유는 어차피 부모 클래스의 들어있는 메서드의 이름이 같아도
+//메서드 오버라이딩을하면 오버라이딩이 먼저 실행되기 때문에 다중 상속이 가능하다
+//interface는 구현이기 때문에 보충한다는 의미인 implements를 쓴다
+package poly.diamond;
+
+public class Child implements InterfaceA, InterfaceB {//다중 상속
+
+    @Override
+    public void methodA() {
+        System.out.println("child.methodA");
+    }
+    @Override
+    public void methodB(){
+        System.out.println("child.methodB");
+    }
+    @Override
+    public void methodCommon() {
+        System.out.println("child.methodCommon");
+    }
+}
+===
+package poly.diamond;
+
+public class DiamondMain {
+    public static void main(String[] args) {
+        InterfaceA a=new Child();
+        a.methodA();
+        a.methodCommon();
+    }
+
+}
+===
+package poly.diamond;
+
+public interface InterfaceA {
+    void methodA();
+    void methodCommon();
+}
+===
+package poly.diamond;
+
+public interface InterfaceB {
+    void methodB();
+    void methodCommon();
+}
