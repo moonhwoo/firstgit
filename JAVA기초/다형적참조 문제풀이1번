@@ -1,0 +1,57 @@
+/*기본적인 인터페이스 이용한 예제이다
+여기서 배워 가야할 부분은 {A}부분을 얻어가야 한다 생각한다(코드의 핵심이라 생각함)
+=>인터페이스인 Sender를 배열로 만들어서 자식 부분들을 new로 참조한다
+=>여기서 new안빼먹게 조심하기!!
+
+그 다음 중요한 부분은 {B}라고 생각하는데
+=>Sender sender여기서 sender로 받으면 부모이므로 자식 부분들에게 쓸수 있다
+=>즉 for 문으로 돌리는데 Sender sender=new EmailSender()  (부모는 자식을 품을수 있다)가능
+=>Sender인터 페이스 안에 void sendMessage(String message)를 써서 ("환영합니다!")처럼 입력 받는 부분의 중복 코드를 줄일수 있고 
+오버라이딩을 하여 앞에 더해서 코드를 다양화 할수있다
+ 
+ */
+package poly.ex;
+
+public interface Sender {
+    void sendMessage(String message);
+}
+====
+package poly.ex;
+
+public class Sendmain {
+    public static void main(String[] args) {
+        Sender[] senders={new EmailSender(),new SmsSender(),new FaceBookSender()}; ///!!! {A}
+        for(Sender sender:senders){
+            sender.sendMessage("환영합니다!");////!!!{B}
+        }
+    }
+}
+=====
+package poly.ex;
+
+public class EmailSender implements Sender {
+    @Override
+    public void sendMessage(String message) {
+        System.out.println("메일을 발송합니다: "+message);
+    }
+}
+=====
+package poly.ex;
+
+public class FaceBookSender implements Sender{
+    @Override
+    public void sendMessage(String message) {
+        System.out.println("페이스북에 발송합니다: "+message);
+    }
+}
+====
+package poly.ex;
+
+public class SmsSender implements Sender {
+    @Override
+    public void sendMessage(String message) {
+        System.out.println("SMS를 발송합니다: "+message);
+    }
+}
+
+
