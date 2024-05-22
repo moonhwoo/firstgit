@@ -1,0 +1,118 @@
+/*OCP(open-closed principle)원칙==>**면접에서 나올수도있음**
+OPEN(open for extension)=>새로운 기능의 추가나 변경사항이 생겼을떄 기존코드는 확장할수 있어야한다
+Closed(closed for modification)=>기존의 코드는 수정되지 않아야 한다
+
+여기서는 OCP원칙 적용
+=>Car를 사용하는 크라이언트 코드인 Driver코드의 변경없이 새로운 자동차를 확장할수있다
+ 
+ */
+package poly.Car1;
+
+public interface Car {
+    void startEngine();
+    void offEngine();
+    void pressAccelerator();
+
+}
+====
+package poly.Car1;
+
+public class Driver {
+    private Car car; //K3Car,model3Car를 모르고 Car만 알음
+
+    public  void setCar(Car car) {
+        System.out.println("자동차를 설정합니다"+car);
+        this.car = car;
+    }
+    public  void drive(){
+        System.out.println("자동차를 운전합니다");
+        car.startEngine();
+        car.pressAccelerator();
+        car.offEngine();
+    }
+
+}
+======
+
+
+package poly.Car1;
+
+public class NewCar implements Car {
+    @Override
+    public void startEngine() {
+        System.out.println("NewCar.startEngine");
+    }
+
+    @Override
+    public void offEngine() {
+        System.out.println(" NewCar.offEngine"   );
+    }
+
+    @Override
+    public void pressAccelerator() {
+        System.out.println("NewCar.pressAccelerator");
+    }
+}
+======
+package poly.Car1;
+
+public class CarMain1 {
+    public static void main(String[] args) {
+        Driver driver = new Driver();
+        //차량선택(k3)
+        K3Car k3Car = new K3Car();
+        driver.setCar(k3Car);
+        driver.drive();
+
+        //차량변경(k3->model3)
+        Model3Car model3Car = new Model3Car();
+        driver.setCar(model3Car);
+        driver.drive();
+
+        //차량변경(model3=>newCar)
+        NewCar newCar = new NewCar();
+        driver.setCar(newCar);
+        driver.drive();
+    }
+}
+====
+package poly.Car1;
+
+public class K3Car implements Car{
+
+    @Override
+    public void startEngine() {
+        System.out.println("K3Car.startEngine");
+    }
+
+    @Override
+    public void offEngine() {
+        System.out.println("K3Car.offEngine");
+    }
+
+    @Override
+    public void pressAccelerator() {
+        System.out.println("K3Car.pressAccelerator");
+    }
+}
+=====
+package poly.Car1;
+
+public class K3Car implements Car{
+
+    @Override
+    public void startEngine() {
+        System.out.println("K3Car.startEngine");
+    }
+
+    @Override
+    public void offEngine() {
+        System.out.println("K3Car.offEngine");
+    }
+
+    @Override
+    public void pressAccelerator() {
+        System.out.println("K3Car.pressAccelerator");
+    }
+}
+
