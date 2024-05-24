@@ -7,7 +7,7 @@
 =>Sender sender여기서 sender로 받으면 부모이므로 자식 부분들에게 쓸수 있다
 =>즉 for 문으로 돌리는데 Sender sender=new EmailSender()  (부모는 자식을 품을수 있다)가능
 =>Sender인터 페이스 안에 void sendMessage(String message)를 써서 ("환영합니다!")처럼 입력 받는 부분의 중복 코드를 줄일수 있고 
-오버라이딩을 하여 앞에 더해서 코드를 다양화 할수있다
+오버라이딩을 하여 앞에 더해서 코드를 다양화 할수 있다
  
  */
 package poly.ex;
