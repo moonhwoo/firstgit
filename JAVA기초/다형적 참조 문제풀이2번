@@ -1,7 +1,7 @@
 ///나중에 다시 꼭 풀어보기 
 /*처음 안부분은 PayStore 클래스에서 Pay(인터페이스) 타입의 결과값을 반환할수 있게 해주는 부분을 첨 알았다 */
 package polypay0.ex_2;
-
+//입력 안받는 경우(main1)
 public class PayMain0 {
     public static void main(String[] args) {
         PayService payService=new PayService();
@@ -21,6 +21,39 @@ public class PayMain0 {
         int amount3 = 15000;
         payService.processPay(payOption3, amount3);
 
+
+    }
+}
+===========
+//입력 받아 하는경우(main2)
+//마지막의 scanner.nextLine()를 쓰는 이유 참고하기!!
+package polypay0.ex_2;
+
+import java.util.Scanner;
+
+public class PayMain1 {
+    public static void main(String[] args) {
+        PayService payService=new PayService();
+        Scanner scanner=new Scanner(System.in);
+
+        while(true) {
+                System.out.println("결제 수단을 입력하세요:");
+                String payOption=scanner.nextLine();
+                if(payOption.equals("exit")) {
+                    System.out.println("프로그램을 종료합니다.");
+                    return;
+                }
+                System.out.println("결제 금액을 입력하세요:");
+                int amount = scanner.nextInt();
+                scanner.nextLine();//한번더 쓰는 이유는?
+                /*scanner.nextLine()을 사용함으로써 입력 버퍼에 남아 있는 개행 문자를 제거하여, 이후 입력이 예상대로 동작하게 합니다.
+                 이는 입력 버퍼 관리의 중요한 부분으로,
+                 특히 다양한 종류의 입력 메서드를 혼용할 때 반드시 고려해야 합니다*/
+
+                payService.processPay(payOption, amount);
+
+
+        }
 
     }
 }
