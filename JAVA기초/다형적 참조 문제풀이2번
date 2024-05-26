@@ -1,0 +1,135 @@
+///나중에 다시 꼭 풀어보기 
+/*처음 안부분은 PayStore 클래스에서 Pay(인터페이스) 타입의 결과값을 반환할수 있게 해주는 부분을 첨 알았다 */
+package polypay0.ex_2;
+
+public class PayMain0 {
+    public static void main(String[] args) {
+        PayService payService=new PayService();
+
+        //kakao 결제
+        String payOption1 = "kakao";
+        int amount1 = 5000;
+        payService.processPay(payOption1, amount1);
+
+        //naver 결제
+        String payOption2 = "naver";
+        int amount2 = 10000;
+        payService.processPay(payOption2, amount2);
+
+        //잘못된 결제 수단 선택
+        String payOption3 = "bad";
+        int amount3 = 15000;
+        payService.processPay(payOption3, amount3);
+
+
+    }
+}
+
+=====
+package polypay0.ex_2;
+
+public interface Pay {
+    public boolean pay(int amount);
+}
+
+======
+package polypay0.ex_2;
+
+    public class PayService {
+        public void processPay(String option, int amount) {
+
+            System.out.println("결제를 시작합니다: option=" + option + ", amount=" + amount);
+            //변하는 부분
+            /*[if (option.equals("kakao")) {
+                Pay pay = new KakaoPay();
+                result = kakaoPay.pay(amount);
+        }else if (option.equals("naver")) {
+                Pay pay = new NaverPay();
+                result = naverPay.pay(amount);]
+                }
+
+                else{
+                System.out.println("결제 수단이 없습니다");
+                result=false;
+                //없을경우를 따로 만들어줘야null처리를 안해도된다
+            }*/
+
+
+                /* 1.무슨 결제로 받을건지 받는부분(PayFind로)
+                   2.결제부분
+                   3.다 없을경우
+                */
+            Pay pay=PayStore.findPay(option);
+            boolean result=pay.pay(amount);
+
+
+            //변하지 않는부분!!!
+            if(result){
+                System.out.println("결제가 성공했습니다");
+            }else{
+                System.out.println("결제가 실패했습니다");
+            }
+        }
+    }
+
+=====
+package polypay0.ex_2;
+
+public abstract class PayStore {
+    public static Pay findPay(String option){//Pay는 메서드 반환타입
+        if(option.equals("kakao")){
+            return new KakaoPay();//바로 KakaoPay()로 둘려줌
+            //앞에서Pay반환값이므로 new KakaoPay();를 통해서 반환가능
+        }else if(option.equals("naver")){
+            return new NaverPay();//NaverPay()로 돌려줌
+        }
+        else{
+            return new DefaultPay();
+        }
+    }
+}
+
+
+=====
+package polypay0.ex_2;
+
+public class DefaultPay implements Pay{
+
+    @Override
+    public boolean pay(int amount) {
+
+        System.out.println("결제 수단이 없습니다");
+        return false;
+
+    }
+}
+
+=====
+package polypay0.ex_2;
+
+public class KakaoPay implements Pay {
+    @Override
+    public boolean pay(int amount) {
+        System.out.println("카카오페이 시스템과 연결합니다.");
+        System.out.println(amount + "원 결제를 시도합니다.");
+        return true;
+    }
+}
+
+=====
+package polypay0.ex_2;
+
+public class NaverPay implements Pay {
+        @Override
+        public boolean pay(int amount) {
+            System.out.println("네이버페이 시스템과 연결합니다.");
+            System.out.println(amount + "원 결제를 시도합니다.");
+            return true;
+        }
+    }
+
+
+
+
+
+
