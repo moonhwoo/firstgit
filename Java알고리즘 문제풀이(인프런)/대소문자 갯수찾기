@@ -1,0 +1,32 @@
+/*
+ 한 개의 문자열을 입력받고, 특정 문자를 입력받아 해당 특정문자가 입력받은 문자열에 몇 개 존재하는지 알아내는 프로그램을 작성하세요.
+
+대소문자를 구분하지 않습니다.문자열의 길이는 100을 넘지 않습니다.
+
+
+Computercooler
+c 정답:2
+ */
+import java.util.*;
+ class Main {
+  public  int get(String str,char word){
+   int howmany=0;
+    str=str.toLowerCase();
+    word=Character.toLowerCase(word);
+    for(char p:str.toCharArray()){
+        if(p==word)
+            howmany++;
+        }
+    
+    return howmany;
+}
+
+
+    public static void main(String[] args) {
+        Main main = new Main();
+        Scanner scanner = new Scanner(System.in);
+        String str = scanner.next();
+        char word=scanner.next().charAt(0);
+        System.out.println(main.get(str,word));
+    }
+}
