@@ -1,0 +1,46 @@
+package first;
+
+import java.util.Scanner;
+
+public class LongestWord {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();//단어가 아니라 한줄을 받는거기 때문에 next()쓰면 값이 안나옴!
+        Main T = new Main();
+        System.out.println(T.longestWord(str));
+
+    }
+
+    public static class Main {
+        public String longestWord(String str) {
+            //1.split(" ")사용하는 방법
+            String longword = "";
+            String[] splitstr=str.split("\\s+");
+            for(String word:splitstr){
+                if(word.length()>longword.length()){
+                    longword=word;
+                }
+            }
+        /*2.indexOf(' ')사용하는 방법
+
+
+            String answer="";
+            int m=Integer.MIN_VALUE,pos;
+            while((pos=str.indexOf(' '))!=-1) { //공백이 있는경우 무한으로 돌아감
+                String tmp=str.substring(0,pos);//substring은 index를 기준으로 자르고 String배열을 리턴해줌
+                int len=tmp.length();
+                if(len>m){
+                    m=len;
+                    answer=tmp;
+                }
+                str=str.substring(pos+1);
+                //앞 부분을 버리고 다시 공백 뒷부분이 첫부분으로 변해서 돌아감
+            }
+            if(str.length()>m) answer=str;
+            //마지막 부분을 넣지 않으면 끝 단어가 가장 클경우가 들어가지지 않음 
+*/
+
+            return longword;
+        }
+    }
+}
