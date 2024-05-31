@@ -1,0 +1,47 @@
+package first;
+//!Character.isAlphabetic(c[left]) 이부분이 메인임
+// 알파벳인지 구하는 오브젝트 앞에 !를 붙여서 알파벳이 아닌경우로 구함
+import java.util.Scanner;
+
+public class OnlyEnglishReverse {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Main T=new Main();
+        String str=sc.nextLine();
+        System.out.println(T.solution(str));
+    }
+
+
+    public static class Main {
+        public String solution(String str){
+    //이렇게하면 문자 vs알파벳 경우가 안바뀜 문제의 의도가 아님
+    String answer="";
+            char[] c=str.toCharArray();
+            char tmp;
+            int left=0;
+            int right=c.length-1;
+        while(left<right){
+            if(!Character.isAlphabetic(c[left])){
+            left++;
+            }else if(!Character.isAlphabetic(c[right])){
+                right--;
+            }
+            else{
+                char temp=c[left];
+                c[left]=c[right];
+                c[right]=temp;
+                left++;
+                right--;
+            }
+            answer=String.valueOf(c);
+
+
+
+
+    }
+            return  answer;
+            //return new String(c);
+        }
+
+    }
+}
