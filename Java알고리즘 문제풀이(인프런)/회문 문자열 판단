@@ -1,0 +1,27 @@
+public class Main {
+    public String solution(String str){
+        /* 제일 간단하게 하는방법
+        * int len=str.lengtj();
+        * for(int i=0;i<len/2;i++){
+        * if(str.charAt(i)!=str.charAt(len-i-1))return "NO";
+        * }
+        * return answer;
+        * }
+        * 
+        * */
+        String ans="";
+        str=str.toLowerCase();
+        char[]c=str.toCharArray();
+        int left=0;
+        int right=c.length-1;
+        while(left<right){
+            if(c[left]==c[right]){
+                left++;
+                right--;
+            }else{
+              return  ans="NO";
+            }
+        }
+        return ans="YES";
+    }
+}
