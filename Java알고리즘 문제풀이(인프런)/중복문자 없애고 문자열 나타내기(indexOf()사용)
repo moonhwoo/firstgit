@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+public class SameAlpIsOut {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String str= sc.next();
+        Main T=new Main();
+        System.out.println(T.solution(str));
+    }
+
+
+    //indexOf는 처음 나타나는 위치
+    public static class Main {
+        public String solution(String str) {
+            String ans="" ;
+    
+            for(int i=0;i<str.length();i++){
+                if(str.indexOf(str.charAt(i))==i)
+                    ans+=str.charAt(i);
+    
+            }
+            return ans;
+        }
+    }
+}
