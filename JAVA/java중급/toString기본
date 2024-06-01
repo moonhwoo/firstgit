@@ -1,0 +1,63 @@
+//Object는 모든 부모클래스의 부모클래스임
+//toString을 통해 print를 꾸밀수있다
+public class ToStringMain2 {
+    public static void main(String[] args) {
+        Car car=new Car("Model Y");
+        Dog dog1=new Dog("멍멍이1",2);
+        Dog dog2=new Dog("멍멍이2",5);
+        System.out.println("1.단순 toString호출");
+        System.out.println(car.toString());
+        System.out.println(dog1.toString());
+        System.out.println(dog2.toString());
+
+        System.out.println("2.println안에서 toString호출");
+        System.out.println(car);
+        System.out.println(dog1);
+        System.out.println(dog2);
+
+        System.out.println("3.Object 다형성 활용");
+        ObjectPrinter.print(car);
+        ObjectPrinter.print(dog1);
+        ObjectPrinter.print(dog2);
+    }
+}
+====
+package tostring;
+
+public class ObjectPrinter {
+    public  static void print(Object obj) {
+        String string="객체 정보 출력"+obj.toString();
+        System.out.println(string);
+    }
+}
+===
+package tostring;
+
+public class Dog {
+    private String dogName;
+    private int age;
+
+    public Dog(String dogName, int age) {
+        this.dogName = dogName;
+        this.age = age;
+    }
+
+    @Override
+    public String  toString() {
+        return "Dog{" +
+                "dogName='" + dogName + '\'' +
+                ", age=" + age +
+                '}';
+    }
+}
+
+======
+package tostring;
+
+public class Car {
+    private String carName;
+
+    public Car(String carName) {
+        this.carName = carName;
+    }
+}
