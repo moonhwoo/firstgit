@@ -1,6 +1,6 @@
 //배울점
 //1.StringBuilder
-//2.equalsIgnoreCase()==>대소문자 구분 없이 같은지  알수있음
+//2.equalsIgnoreCase()==>대소문자 구분 없이 같은지  알수있음(암기하기!!)
 
 public class Main {
     public String solution(String str){
