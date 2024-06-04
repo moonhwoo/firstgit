@@ -1,0 +1,79 @@
+import numpy as np 
+import matplotlib.pyplot as plt #데이터 시각화를 위해 import
+
+def sample_binary(s_size):# 이진 데이터 생성하는 함수
+    red_mean=[-1,0] #빨간 클래스의 평균
+    blue_mean=[1,0] #피란 클래스의 평균
+    std_dev=.6 # 두클래스의 표준 편차 =>표준편차를 0.6
+    x_red=np.random.randn(s_size,2)*std_dev+red_mean #빨간 클래스의 랜덤 데이트 생성
+    x_blue=np.random.randn(s_size,2)*std_dev+blue_mean
+    x=np.vstack((x_red,x_blue))#빨간,파란 데이터를 세로로 쌓음
+    y=np.vstack((np.zeros((s_size,1),dtype=np.int64),np.ones((s_size,1),dtype=np.int64)))
+    #라벨(빨간 클래스는0,파란 클래스는 1)을 생성하고 세로로 쌓는다
+    return(x,y) #생성된 데이터와 라벨을 반환한다
+
+input_data,target=sample_binary(100) #함수를 호출하여 클래스당 100개의 샘플을 생성
+print(input_data.shape,set(target.flatten())) #입력 데이터의 형태와 라벨의 집할을 출려
+x_red=input_data[(target==0).flatten()] #빨간 클래스의 데이터를 추출
+x_blue=input_data[(target==1).flatten()]#파란 클래스의 데이터를 추출
+plt.plot(x_red[:,0],x_red[:,1],'ro',label='class red')#빨간 클래스의 데이터를 빨간점으로 플롯
+plt.plot(x_blue[:,0],x_blue[:,1],'b^',label='class blue')#파란점으로 플롯
+plt.grid()#플롯에 그리드를 추가=>세로선 가로선
+plt.legend(loc=2) #왼쪽위에 범례 추가=>알아보기 쉽게 왼쪽위의 박스
+plt.xlabel('$x_1$',fontsize=15)#x축 라벨
+plt.xlabel('$x_2$',fontsize=15)#y축 라벨 설정
+plt.title('red vs. blue classes in the input space')#제목 추가
+plt.show()#플롯을 표시
+
+#! 데이터 나누기(학습 데이터와 테스트 데이터)
+from sklearn.model_selection import train_test_split
+X_train,X_test,y_train,y_test=train_test_split(input_data,target,test_size=0.2,random_state=42)
+#데이터를 학습 데이터와 테스트 데이터로 나눔 =>테스트 데이터는 전체의 20%
+print(X_train.shape,X_test.shape,y_train.shape,y_test.shape)
+#나눠진 데이터의 형태를 출력하여 확인
+
+#!!!!로지스틱 회귀 함수 정의!!!!
+def predict(x,w,b):#가중치와 바이어스를 사용하여 출력 *예측* 함수 정의
+    return sigmoid(x.dot(w)+b)#입력과 가중치의 선형 결합에 바이어스를 더하고 시그모이드 함수 적용
+
+def sigmoid(x):#시그모이드 활성화 함수 정의
+    #=>!!!시그모이드는 이진 분류 문제에서 사용되는 함수임!!!
+    return 1/(1+np.exp(-x))#x의 시그모이드를 계산
+#=>1/(1+e^(-z))=>np.exp(-x)가 e^(-x) 임
+#=>x가 증가할수록 1에 가까워짐 감소할수록 0에 가까워짐
+
+def gradient(x,error):#손실 함수에 대한 가중치와 바이어스의 그래디언트 계산
+#=>그래디언트는 손실함수가 최소화되도록 가중치와 바이어스를 업데이트 하는 방향
+    return x.T.dot(error),np.sum(error)
+#x=> 입력데이터(특성 행렬)
+
+def update(w,b,gd,learning_rate):
+    return w-learning_rate*gd[0],b-learning_rate*gd[1]
+#
+def cost(yp,y):
+    return -(np.multiply(y,np.log(yp))+np.multiply((1-y),np.log(1-yp))).mean()
+
+learning_rate=0.01
+epoch=30
+
+weight=np.zeros((2,1))
+bias=0
+train_costs=[]
+for i in range(epoch):
+    pred=predict(X_train,weight,bias)
+    epoch_cost=cost(pred,y_train)
+    train_costs.append(epoch_cost)
+    print(f"cost at epoch{i+1}:{epoch_cost:4f}")
+    gd=gradient(X_train,pred-y_train)
+    weight,bias=update(weight,bias,gd,learning_rate)
+plt.plot(np.arrange(len(train_costs)),train_costs)
+plt.show()
+
+
+def acc_score(pred,target):
+     return np.sum(np.arround(pred)==target)/len(target)
+
+train_pred=predict(X_train,weight,bias)
+test_pred=predict(X_test,weight,bias)
+print("Train accuarcy:",acc_score(train_pred),y_train)
+print("Test accuarcy:",acc_score(test_pred),y_test)
