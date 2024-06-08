@@ -32,9 +32,14 @@ class Player:
                     continue
                     
             #TODO 1-(2): 입력한 포인트가 주어진 포인트와 일치하는지 확인합니다. (포인트 당 체력 = 3, 공격력 = 1, 마법력 = 1 증가)
-            if hp+ad+ap==13:
-                print("체력: "+self.hp+hp+" 공격력: "+self.ad+ad+" ")
-                
+            if hp+ad+ap==point:
+                self.hp+=3*hp
+                self.ad+=ad
+                self.ap+=ap
+                print(f"체력: {self.hp} 공격력: {self.ad} 마법력: {self.ap}")
+                break
+            else:
+                print(f"입력한 능력치의 총합이 {point}와 같아야 합니다. 다시 입력해주세요.")    
             ##### END OF TODO 1-(2)(문제와 본 라인 사이에 코드를 작성하세요.) #####
             
     """
@@ -45,7 +50,7 @@ class Player:
     """
 
     def decrease_hp(self, damage: int):
-        self.hp = max(self.hp - damage, 0)
+        self.hp = max(self.hp - damage, 0) #max를 사용함으로써 self.hp-damage한 값이 0밑으로 내려가지 않음
     
     def check_status(self, enemy):
         # 플레이어와 적의 현재 상태를 출력합니다.
@@ -56,7 +61,7 @@ class Player:
         enemy.decrease_hp(damage)
         print(f"일반 공격으로 {damage}의 데미지를 주었습니다.\n")
 
-    def basic_attack(self, enemy: Type["Enemy"]):
+    def basic_attack(self, enemy: Type["Enemy"]):#enemy: Type["Enemy"]는 enemy타입을 인스턴스로 갖는다는것을 나타냄 오류를 줄여줌
         """
         TODO 2-(1) 
         - 치명타 -> 1부터 10 사이의 랜덤한 숫자를 생성합니다.
@@ -64,7 +69,18 @@ class Player:
         - 치명타가 2보다 작거나 같은 경우, 치명타가 발생한 것으로 간주합니다. 치명타가 발생한 경우, 플레이어의 공격력에서 적의 방어력을 뺀 후, 그 값을 두 배로 만들어 적의 체력에서 뺍니다.
         - 플레이어가 적에게 가한 데미지를 출력합니다.
         """ 
-        
+        critical=random.randrange(1,10)#10사이 니깐 (1,10)으로 나타냄
+        if critical>2:
+            damage = self.ad - enemy.ad_defence
+            enemy.decrease_hp(damage)
+            print(f"일반 공격으로 {damage}의 데미지를 주었습니다")
+            
+        else: #크리티컬이 2보다 작거나 같을때
+            damage=(self.ad - enemy.ad_defence)*2
+            enemy.decrease_hp(damage)
+            print(f"치명타가 적용되어 {damage}의 데미지를 주었습니다")
+            
+            
         ##### END OF TODO 2-(1)(문제와 본 라인 사이에 코드를 작성하세요.) #####
 
     def magic_attack(self, enemy: Type["Enemy"]):
@@ -73,6 +89,9 @@ class Player:
         - 플레이어의 마법 공격력의 두 배에서 적의 마법 방어력을 뺀 만큼의 데미지를 주게 됩니다.
         - 플레이어가 적에게 가한 데미지를 출력합니다.
         """ 
+        damage = self.ap*2 - enemy.ap_defence
+        enemy.decrease_hp(damage)
+        print(f"마법 공격으로 {damage}의 데미지를 주었습니다.")
         
         ##### END OF TODO 2-(2)(문제와 본 라인 사이에 코드를 작성하세요.) ####
         
@@ -83,8 +102,9 @@ class Player:
         - 무작위로 5에서 10 사이의 값을 선택하여 플레이어의 체력에 더합니다.
         - 회복된 플레이어의 현재 체력을 출력합니다. 
         """ 
-        
-       
+        heal=random.randrange(5,10)
+        print(f"체력을 회복합니다. 현재 hp는 {self.hp+heal}입니다.")
+        self.hp+=heal
         ##### END OF TODO 2-(3)(문제와 본 라인 사이에 코드를 작성하세요.) #####
     
     def attack(self, enemy: Type["Enemy"], player_index: int):
@@ -133,7 +153,11 @@ class Enemy:
     
     def basic_attack(self, player: Type[Player], player_index: int):
         #TODO 3-(1): 공격 대상 플레이어의 체력을 적의 공격력만큼 감소시키고, 공격 받은 플레이어의 남은 체력을 출력합니다.
+    
+        player[player_index].decrease_hp(self.ad)
         
+        
+        print(f"{player_index+1}번 유저에게 {self.ad}의 데미지, 적의 공격으로 현재 남은 체력은 {player[player_index].hp}입니다.")
         ##### END OF TODO 3-(1)(문제와 본 라인 사이에 코드를 작성하세요.) #####
 
     def heal_self(self):
@@ -150,6 +174,7 @@ class Enemy:
         print("적의 차례입니다.\n")
         #TODO 3-(2): enemy_action 변수에 무작위값을 할당합니다. (1부터 10사이)
        
+        enemy_action=random.randrange(1,10)
         ##### END OF TODO 3-(2)(문제와 본 라인 사이에 코드를 작성하세요.) #####
         
         if enemy_action == 1:
@@ -198,6 +223,10 @@ class Game:
         해당 플레이어의 인덱스를 제거합니다. 
         - 람다 함수를 사용해 문제를 풀어보세요! (사용하지 않아도됩니다)
         """
+        self.player_list = list(filter(lambda player: player.hp > 0, self.player_list))#filter 함수와 람다 함수를 같이 사용 
+        #람다 함수란?=>함수를 def로 정의 하지 않고도 쉽고 빠르게 정의하는 방법
+        
+
         
         ##### END OF TODO 4-(1)(문제와 본 라인 사이에 코드를 작성하세요.) ##### 
         if len(self.player_list) == 0 or self.enemy.hp == 0:
@@ -209,7 +238,8 @@ class Game:
         """
         TODO 4-(2): 남은 플레이어들 중에서 무작위로 한 명을 선택해 반환해주세요!
         """
-        
+        randomindex=random.randrange(0,len(self.player_list)) #남아 있는 플레이어 리스트의 인덱스를 무작위로 고름
+        return self.player_list[randomindex]
         ##### END OF TODO 4-(2)(문제와 본 라인 사이에 코드를 작성하세요.) ##### 
 
     def game(self):
@@ -218,17 +248,20 @@ class Game:
 
         while(self.turn_check()):
             # 플레이어의 공격이 시작됩니다.
-            for player_index, player in enumerate(self.player_list):
+            for player_index, player in enumerate(self.player_list): #enumerate는 plater_index,player 값을 튜플 값으로 반환해줌 (인덱스 번호,플레이어 이름)
                 player.attack(self.enemy, player_index)
                 if self.enemy.hp == 0:
                     break
         
             if (self.turn_check()):
                 #TODO 4-(3): 주어진 함수를 사용해 적이 공격할 대상과 해당 대상의 인덱스를 target_player, target_index에 할당합니다.
+                target_player=self.select_target_player()
+                target_index=self.player_list.index(target_player) #??이렇게 하면 한명이 죽으면 출력떄 번호가 바뀌는것이 아닌가?=>해결방법을 모르겠습니다.
+                
                 
                 ##### END OF TODO 4-(3)(문제와 본 라인 사이에 코드를 작성하세요.) #####
 
-                self.enemy.attack(target_player, target_index)
+                self.enemy.attack(self.player_list, target_index)
             else:
                 break
             
