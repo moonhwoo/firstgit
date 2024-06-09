@@ -1,0 +1,31 @@
+package first;
+
+import java.util.Scanner;
+
+public class VaildPalindrome {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String str=sc.nextLine();
+        Main T=new Main();
+        System.out.println(T.solution(str));
+    }
+
+    public static class Main {
+        public String solution(String str) {
+            String ans = "NO";
+            str = str.toUpperCase().replaceAll("[^A-Z]", "");
+            /*
+            replace 는 단순한 문자 또는 문자열을 쓰지만 정규식을 쓰지 않는다
+            반면 replaceAll은 정규식을써서 일치하는 모든 부분을 바꾼다
+            [^A-Z] 여기서^는 부정을 의미하는데 A-Z까지가 아니면 ""즉 빈뮨자열로 대체하라는 의미이다
+    
+             */
+            String tmp = new StringBuilder(str).reverse().toString();
+            if (str.equals(tmp)) {
+                ans="YES";
+            }
+    
+            return ans;
+        }
+    }
+}
