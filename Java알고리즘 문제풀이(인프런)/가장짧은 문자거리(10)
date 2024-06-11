@@ -1,0 +1,45 @@
+package first;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class CloseFarNumber {
+    public static void main(String[] args) {
+
+        Scanner sc=new Scanner(System.in);
+        String s=sc.next();
+        char t=sc.next().charAt(0);
+        Main2 T= new Main2();
+        System.out.println(T.solution(s,t));
+
+
+    }
+
+    public static class Main2 {
+        public String solution(String s,char t){
+            String ans="";
+            char[]x=s.toCharArray();
+            ArrayList<Integer> index=new ArrayList<Integer>(); //<>안에는 int가 아닌 Integer가 들어감
+            for(int i=0;i<x.length;i++){
+                if(x[i]==t)
+                    index.add(i);  //더할때append가 아니라add!!
+                }
+
+
+            for(int i=0;i<s.length();i++){
+                int min=Integer.MAX_VALUE;
+                for(int p=0;p<index.size();p++){ //arraylist의 크기는 length가 아니라 size로 구함
+
+                int case1=i-index.get(p);  //arraylist의 값을 가져오기 위해선 get을씀!
+                if(case1<0)
+                    case1=-case1;
+                if(case1<min)
+                    min=case1;
+                }
+                ans+=min+" ";
+            }
+
+            return ans.trim(); //trim()을 써줘야지  마지막에 빈공간에서 나오는 1이 안나옴
+        }
+    }
+}
