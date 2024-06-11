@@ -1,0 +1,49 @@
+/*배울점
+1.math함수
+2.왼쪽에서 오른쪽으로 쭉 확인 후 오른쪽에서 왼쪽으로 쭉 확인하는 방법
+*/
+package first;
+import  java.util.*;
+class Main{
+    public int[] solution(String s,char t){
+        int[] answer=new int[s.length()];
+        int p=1000;//초기 값을 큰수인 1000으로 잡음
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)==t){
+                p=0;
+                answer[i]=p;
+
+            }else{
+                p++;
+                answer[i]=p; //여기까지면 왼쪽에서 오른쪽방향으로 숫자가 커지는 방법
+                //중간에 같은 문자가 있어도 최소거리가 아니라 그냥 커지기만함
+                //그래서 오른쪽에서 왼쪽으로 오는것도 필요
+            }
+        }
+        p=1000;//다시 초기화 오른쪽에서 왼쪽으로 가기위해
+        for(int i=s.length()-1;i>=0;i--){
+            if(s.charAt(i)==t){
+                p=0;
+                //answer[i]=p;
+                //이미 앞에서 0으로 되었기때문에 중복되는 부분
+            }else{
+                p++;
+                answer[i]=Math.min(answer[i],p);
+                //!!처음 보는 함수 Math anwer[i]와p중에서 작으값을 넣는것
+
+            }
+        }
+        return  answer;
+    }
+
+    public static void main(String[] args) {
+        Main T = new Main();
+        Scanner kb=new Scanner(System.in);
+        String str=kb.next();
+        char c=kb.next().charAt(0);
+        for(int x:T.solution(str,c)){
+            System.out.println(x+" ");
+        }
+
+    }
+}
