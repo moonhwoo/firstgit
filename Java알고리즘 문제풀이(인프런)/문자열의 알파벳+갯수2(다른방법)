@@ -1,0 +1,37 @@
+package first;
+//배울점!!!
+//String문자열에서 마지막부분이 잘려나가는경우 str=str+" " ;을 함으로써 잘리지않게 할수있다
+import java.util.Scanner;
+
+public class ContiuousAlphabet2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Main3 T = new Main3();
+        String str = sc.next();
+        System.out.println(T.solution(str));
+    }
+
+    public static class Main3 {
+        public String solution(String str) {
+            String ans = "";
+            str = str + " "; //이거를 추가해줘야지 마지막 문자열이 들어가짐 !!!!꿀팁!!!!  원래거에는 이거를 안해서 엄청 헤맸었다
+            int cnt = 1;
+            for (int i = 0; i < str.length() - 1; i++) { //-1을 안해주면 str의 마지막 문자인 " "까지 가기때문에 해줘야됨
+                if (str.charAt(i) == str.charAt(i + 1)) {
+                    cnt++;
+                } else {
+                    ans += str.charAt(i); //ans가 string형이고 char형을 더해도된다
+                    if (cnt > 1) {
+                        ans += String.valueOf(cnt); //하지만cnt는 정수형이므로char형으로 바꾸어 주어야하므로 String.value써야함
+                        cnt = 1;//다시 초기화
+
+                    }}
+
+            }
+
+            return ans;
+        }
+    }
+}
+
+
