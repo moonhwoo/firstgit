@@ -1,0 +1,48 @@
+package first;
+
+import java.util.Scanner;
+
+public class ContiuousAlphabet {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        Main3 T=new Main3();
+        String str=sc.next();
+        System.out.println(T.solution(str));
+    }
+
+    public static class Main3 {
+        public String solution(String str){
+            String ans="";
+            char []x=str.toCharArray();
+            int count=1;
+            char first=x[0];//새로운 문자의 첫번째 문자
+            for(int i=1;i<str.length();i++){
+
+                if(x[i]==first){ //다음 배열이 맨앞의 배열과 같다면
+                    count++;
+
+                }else{ //새로운 문자가 나왔으면 앞의 내용을 저장해야됨
+
+                      //연속된 문자가 1개일뿐일때는 숫자를 나타내지않고 문자만 나타냄
+                    ans+= String.valueOf(first); //숫자가 한개뿐일때
+                      if (count>=2 ){ //연속된 숫자의 갯수가 2이상일때
+
+                        ans+=String.valueOf(count);//?char형으로count를 안바꿔줘도 되는것인가? 이게안되면 ans+=x[i]; ans+=char(count);
+
+                         }
+                    count=1;
+                    first=x[i];
+                    }
+
+
+                }
+            ans += String.valueOf(first);
+            if (count > 1) {
+                ans += String.valueOf(count);
+            }
+
+
+            return ans;
+        }
+    }
+}
