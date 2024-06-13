@@ -1,0 +1,48 @@
+import java.util.Scanner;
+  
+public class Main {
+  public String solution(String str){
+        String ans="";
+        String[] divide=new String[str.length()/7];//7개씨 나눠진 리스트
+        int numpart=str.length()/7;
+        for(int i=0;i<numpart;i++){
+            if(str.length()>=7){
+                divide[i] = str.substring(0, 7);
+                str = str.substring(7);// 앞의 7개 문자로 이루어진 단어가 들어갔으므로 잘라내고 다시 그 뒤부터 있는 문자열로 만듬
+            }else{
+                divide[i]=str;
+            }
+        }//여기까지 하면 단어가 나눠들어가져있음
+        for(String x:divide){  //나눠진 단어 들 1개씩 꺼내서 해석함
+            int total=0;
+            char[]ch=x.toCharArray();//계산하기 위해 단어 1개씩꺼내기
+            for(int p=0;p<x.length();p++){
+
+                if(ch[p]=='#'){
+                    total+=Math.pow(2,6-p); //10 =>2**1 1000=>2**3 //6-p가 가능한 이유는 7개씩 끊었기 때문
+                }
+
+            }
+            ans+=(char)total; //total값을 다시 char형으로 바꾸어 더해줌
+        }
+
+        return ans;
+    }
+
+
+
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        Main T=new Main();
+     
+        int number=sc.nextInt();
+        String str="";
+        String str_1=sc.next();
+        if(str_1.length()==number*7){
+            str=str_1;
+        }
+        System.out.println(T.solution(str));
+    
+}
+
+}
