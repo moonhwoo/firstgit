@@ -1,0 +1,30 @@
+##진짜 간단하게 끝내는 문제 
+#배울점!
+#1.substring을 잘라내고 싶으면 str=str.substring(7)과 같이 끊어내기
+#2.Integer.parseInt(문자열,2)은 2진수로 이루어진 문자열을 10진수로 바꾸어줌
+package first;
+
+import java.util.Scanner;
+
+public class EncodingDecoding2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Main4 T = new Main4();
+        int n = sc.nextInt();
+        String str = sc.next();
+        System.out.println(T.solution(n, str));
+    }
+}
+    class Main4{
+        public String solution(int n,String str){
+        String ans="";
+        for(int i=0;i<n;i++){
+            String tmp=str.substring(0,7).replace("#","1").replace("*","0"); //나눈거에서 바로 이진수로 바꿔줌
+            int num=Integer.parseInt(tmp,2); //!! Integer.parseInt(tmp,2);를쓰면 이진수를 10진수로 바로 바꾸어줌 (개사기...)
+            ans+=(char)num;
+            str=str.substring(7);
+        }
+        return ans;
+        }
+    }
+
