@@ -1,0 +1,53 @@
+/*
+ * 이 것을 배우면서 지금까지 썼던 equals는 왜 오버라이딩을 하지 않았는데 이건 왜 써야 했나 생각해보며
+ * 연습해봤는데 그이유는 이제까지 하던것은 같은 클래스안에서의 문장이 같은지를 물어보는 거였지만
+ * 이 예제는 다른 클래스에서 같은 부모인 Object를 통해서 가져와 비교를 하는거기 때문에 overriding을 통해
+ * 정의를 해줘야 정확히 비교를 한다는것을 알게 되었다.
+ */
+package object.equals;
+
+public class RectangleMain {
+    public static void main(String[] args) {
+        Rectangle rect1=new Rectangle(100,20);
+        Rectangle rect2=new Rectangle(100,20);
+        System.out.println(rect1);
+        System.out.println(rect2);
+        System.out.println(rect1==rect2);
+        System.out.println(rect1.equals(rect2));
+
+    }
+}
+====
+package object.equals;
+
+import java.util.Objects;
+
+public class Rectangle {
+    private int a;
+    private int b;
+    public Rectangle(int a,int b){
+        this.a=a;
+        this.b=b;
+    }
+    @Override
+public String toString(){
+        return "Rectangle{ Width="+this.a+", height="+this.b+"}";
+    }
+
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Rectangle rectangle = (Rectangle) o;
+        return a == rectangle.a && b == rectangle.b;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(a, b);
+    }
+
+}
+=====
