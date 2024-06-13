@@ -1,0 +1,51 @@
+package immutable.address;
+/*불변 객체가 필요한 이유
+=>같은 객체 같은 참조값을 공유하면 데이터 메모리 적으로는 효율적이지만 잘못하면 같은 참조값을 갖는 1개의 값을 바꾸면 나머지 값도 같은 참조값을 공유하므로
+데이터 값이 변하는 경우가 생긴다 이는 복잡한 코드에서 발생하면 찾기 힘드므로 대안이 필요하다!!
+
+문제 발생 지점
+=>같은 참조값을 지정하는 과정에서는 문제가 되짆 않지만
+!!!문제는 값을 다른값으로 대입할때 발생한다
+=>이때문에 final을 사용하여 값을 변경하지 못하도록 해준다
+ */
+
+
+public class ImmutableAddress {
+    private final String str;  // 불변객체 만드는 법
+    public ImmutableAddress(String str){
+        this.str=str;
+
+    }
+
+    public String getStr() {
+        return str;
+    }
+
+   /* public void setStr(String str) {
+        this.str = str;
+    }*/
+    //=>!! 이부분은 final을 통해서 통제를 해놓았기 때문에 쓸수 없는 부분
+}
+
+============
+package immutable.address;
+
+public class RefMain_2 {
+    public static void main(String[] args) {
+        ImmutableAddress a=new ImmutableAddress("서울");
+        ImmutableAddress b=a; //참조값 대입을 막을수 있는 방법은 없다
+        System.out.println("a"+a);
+        System.out.println("b"+b);
+
+
+
+        //b.setValue("부산");=> 에러가 뜸
+        //이를 보고 대입 할수없구나 생각하고 다른 새로운 참조값을 생성하게 함
+        //=>
+        b=new ImmutableAddress("부산");
+        System.out.println("a"+a);
+        System.out.println("b"+b);
+    }
+
+
+}
