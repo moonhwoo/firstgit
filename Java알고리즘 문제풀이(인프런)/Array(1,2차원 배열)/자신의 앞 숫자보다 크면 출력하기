@@ -1,0 +1,37 @@
+//처음 부터 받을떄 for문을 이용하고 Int형으로 리스트를짜서 받으면 된다
+package Array;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class FrontThanBigger {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Main T=new Main();
+        int number=sc.nextInt();
+        int[] arr=new int[number];
+        for(int i=0;i<arr.length;i++){
+            arr[i]=sc.nextInt();
+        }
+        for(int x:T.solution(number,arr)){
+            System.out.print(x+" ");
+        }
+    }
+
+    public static class Main {
+        public ArrayList<Integer> solution(int n, int[]arr){
+            ArrayList<Integer> ans = new ArrayList<>();//몇개가 있을줄 모르니 arraylist사용
+            ans.add(arr[0]);
+    
+            for(int i=1;i<n;i++){
+                if(arr[i]>arr[i-1]){
+                    ans.add(arr[i]);
+                }
+            }
+    
+    
+            return ans;
+    
+        }
+    }
+}
