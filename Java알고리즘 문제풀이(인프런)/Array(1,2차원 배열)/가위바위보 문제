@@ -1,0 +1,45 @@
+//비겼을때를 맨처음두고 a가 이기는 경우를else if로 하고 나머지 b가 이기는 경우는 else로 처리하면 한번에 가능!
+
+package Array;
+
+import java.util.Scanner;
+
+public class RockPaperScissors {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int number = sc.nextInt();
+        Main T=new Main();
+        char[] A=new char[number];
+        char[] B=new char[number];
+    for (int i = 0; i < number; i++) { //A입력 받기
+            A[i] = sc.next().charAt(0);
+        }
+        for (int i = 0; i < number; i++) { //B입력받기
+            B[i] = sc.next().charAt(0);
+        }
+       for(char x:T.solution(number,A,B)){
+           System.out.println(x);
+       }
+    }
+
+    public static class Main {
+        public char[] solution(int number,char[] A, char[] B) {
+            char[] ans = new char[number];
+            //가위바위보 구현 1:가위 2:바위 3:보
+
+
+            for (int i = 0; i < number; i++) {
+                if (A[i] == B[i]) {
+                    ans[i] = 'D';//비겼을댄 D출력
+                } else if ((A[i] == '1' && B[i] == '3') || (A[i] == '2' && B[i] == '1') || (A[i] == '3' && B[i] == '2')) {
+                    ans[i] = 'A';
+                } else ans[i] = 'B';
+            }
+                return ans;
+
+            }
+
+
+
+        }
+}
