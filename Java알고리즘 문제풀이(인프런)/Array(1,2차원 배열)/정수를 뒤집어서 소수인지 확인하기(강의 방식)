@@ -1,0 +1,49 @@
+package Array;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class ReversePrimeNumber2 {
+    public boolean isprime(int num) {
+        if(num==1) return false;
+        for(int i=2;i<num;i++) {
+            if(num%i==0) return false;
+
+        }
+        return true;
+    }
+    public ArrayList<Integer> solution(int n, int[] arr){ //arraylist로 받기 =>몇개가 나올지 모르기 때문
+        ArrayList<Integer> answer=new ArrayList<>();
+
+        //배열을 뒤집는다
+        for(int i=0;i<n;i++) {
+            int tmp=arr[i];
+            int res=0;//뒤집힌 값을 받을 값을 초기화
+            while(tmp>0){
+                int t=tmp%10; //10으로 나눴을때 나머지 //
+                res=res*10+t;
+                tmp=tmp/10; //나누면서 한자리씩 줄여감
+            }
+            if(isprime(res)) answer.add(res);
+        }
+        return answer;
+    }
+
+    public static class Main {
+        public static void main(String[] args) {
+            ReversePrimeNumber2 T=new ReversePrimeNumber2();
+            Scanner sc = new Scanner(System.in);
+            int n=sc.nextInt();
+            int[] arr = new int[n];
+            for (int i = 0; i < n; i++) {
+                arr[i] = sc.nextInt();
+            }
+
+               for(int x:T.solution(n,arr)){
+                   System.out.print(x+" ");
+               }
+            }
+
+        }
+    }
+
