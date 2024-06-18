@@ -1,0 +1,49 @@
+package immutable.test;
+//with는 불변객체에서 관례로 쓰임 커피에 설탕을 넣는것처럼 원래거를 바꿀때 with를씀!
+public class ImmutableMyDate {
+    private final int year;
+    private final int month;
+    private final int day;
+
+    public ImmutableMyDate(int year, int month, int day) {
+        this.year = year;
+        this.month = month;
+        this.day = day;
+    }
+
+    public ImmutableMyDate withYear(int newyear) {
+
+        return new ImmutableMyDate(newyear, month, day);
+    }
+
+    public ImmutableMyDate withMonth(int newmonth) {
+        return new ImmutableMyDate(year, newmonth, day);
+    }
+
+    public ImmutableMyDate withDay(int newday) {
+        return new ImmutableMyDate(year, month, newday);
+    }
+
+ //=>final로 했기때문에 set()를 쓸수 없음!!
+
+    @Override
+    public String toString() {
+        return year + "-" + month + "-" + day;
+    }
+}
+======
+package immutable.test;
+
+public class ImmutableMyDateMain {
+    public static void main(String[] args) {
+        ImmutableMyDate date1 =new ImmutableMyDate(2024,1,1);
+        ImmutableMyDate date2 =date1;  //같은 주소값을 가짐 date1,date2모두 //x001을 가짐
+        System.out.println("date1: " + date1);
+        System.out.println("date2: " + date2);
+
+        System.out.println("2025->date1");
+        date1=date1.withYear(2025); //이렇게 값을 받으면 바뀐값이 date1에만 저장이된다  //이렇게 되면date1이//x002에 들어감
+        System.out.println("date1: " + date1); //x002
+        System.out.println("date2: " + date2);//x001
+    }
+}
