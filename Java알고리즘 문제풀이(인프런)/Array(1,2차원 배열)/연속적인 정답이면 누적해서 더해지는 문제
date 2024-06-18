@@ -1,0 +1,34 @@
+//간단한 문제 여기서key count라는 누적값을 갖는 것을 생성해주면 끝남
+package Array;
+
+import java.util.Scanner;
+
+public class Grade123 {
+    public int solution(int num,int[] list) {
+        int ans=0;
+        int count=0;
+        for(int i=0;i<list.length;i++){
+            if(list[i]==1){
+                count++;
+                ans+=count;
+            }else{  //1이 아닐때가 모두0이라고 가정하에
+                count=0;
+            }
+        }
+        return ans;
+
+    }
+
+    public static class Main {
+        public static void main(String[] args) {
+            Scanner sc = new Scanner(System.in);
+            Grade123 T=new Grade123();
+            int num=sc.nextInt();
+            int[] list=new int[num];
+            for(int i=0;i<num;i++) {
+                list[i]=sc.nextInt();
+            }
+            System.out.println(T.solution(num,list));
+        }
+    }
+}
