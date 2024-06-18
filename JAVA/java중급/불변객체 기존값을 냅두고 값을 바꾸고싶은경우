@@ -1,0 +1,32 @@
+package immutable.change;
+
+public class ImmutableObj {
+    private final int value;
+
+    public ImmutableObj(int value) {
+        this.value = value;
+    }
+
+    public ImmutableObj add(int addValue) {
+        int result=value+addValue;
+        return new ImmutableObj(result);//!!!!! 새로운 ImmutableObj로 반환하므로 main에서 쓰고 싶으면 받아써야함
+    }
+    public int getValue() {
+        return value;
+    }
+    //set은 value가 final이므로 만들어지지가 않음
+}
+
+------------
+package immutable.change;
+
+public class ImmutableMain1 {
+    public static void main(String[] args) {
+        ImmutableObj obj1=new ImmutableObj(10);
+        ImmutableObj obj2=obj1.add(20);
+        //이렇게 하면 계산이후에도 초기값을 가져올수 있다
+        System.out.println("obj1="+obj1.getValue());
+        System.out.println("obj2="+obj2.getValue());
+    }
+}
+-----------
