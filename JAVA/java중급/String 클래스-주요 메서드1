@@ -1,0 +1,50 @@
+/*알고리즘 문제를 풀면서 대부분 알지만 처음 보는 것들 기억해두기 쉽게 한번더 정리
+ * 1."   ".isBlank() 비어있는지 확인 str. 이렇게 아니어도 " "비어있는 문자열 처럼 문자열이면 바로.쓰고 쓸수있음
+ * 2.str1.compareTo(str3) 알파벳 차이만큼 숫자를 반환함
+ * 3.str1.startsWith("Hello") 들어있는 문자로 문자열이 시작하는지 반환
+ * 4.str.lastIndexOf("Java") 거꾸로 찾을수도 있음
+ */
+public class StringInfoMain {
+    public static void main(String[] args) {
+        String str="Hello. Java!";
+        System.out.println("문자열의 길이"+str.length());
+        System.out.println("문자열이 비어있는지"+str.isEmpty());
+        System.out.println("문자열이 비어있거나 공백인지1"+str.isBlank());
+        System.out.println("문자열이 비어있거나 공백인지2"+"   ".isBlank());
+
+        char c=str.charAt(7);
+        System.out.println("7번 인덱스의 문자="+c);
+
+
+    }
+}
+===
+
+public class StringComparisonMain {
+    public static void main(String[] args) {
+        String str1 = "Hello, Java!";//대문자 일부
+        String str2 = "hello, java!";//대문자 없음
+        String str3 = "Hello, World!";
+
+        System.out.println("str1 equals str2: " + str1.equals(str2));
+        System.out.println("str1 equalsIgnoreCase str2: " + str1.equalsIgnoreCase(str2));
+
+        System.out.println("'b' compareTo 'a': " + "b".compareTo("a")); //알파벳 a와 b의 차이를 알려줌 1칸 차이!
+        System.out.println("str1 compareTo str3:"+ str1.compareTo(str3));
+
+        System.out.println("str1 start with 'Hello':"+ str1.startsWith("Hello")); //str1이 헬로로 시작하냐 물음
+        System.out.println("str1 end with 'Hello':"+ str1.endsWith("Hello"));
+    }
+}
+===
+public class StringSearchMain {
+    public static void main(String[] args) {
+        String str = "Hello, Java! Welcome to Java World.";
+
+        System.out.println("문자열에 'Java'가 포함되어 있는지:"+str.contains("Java"));
+        System.out.println("'Java'의 첫 번쨰 인덱스"+str.indexOf("Java")); //Java의 시작지점 위에서 인덱스7이 나옴
+        System.out.println("인덱스 10부터 'Java'의 인덱스"+str.indexOf("Java",10)); //10부터 다음으로Java가 나올떄까지 찾음
+        System.out.println("'Java'의 마지막 인덱스: "+str.lastIndexOf("Java"));//거꾸로 부터 찾기
+
+    }
+}
