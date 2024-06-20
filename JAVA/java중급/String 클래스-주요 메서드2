@@ -1,0 +1,34 @@
+package String.method;
+
+public class StringChangeMain {
+    public static void main(String[] args) {
+        String str="Hello, Java! Welcome to Java!";
+        System.out.println("index 7번 부터의 부분 문자열:"+str.substring(7));
+        System.out.println("index 7부터 12까지의 부분 문자열"+str.substring(7,12));
+
+        System.out.println("문자열 결합"+str.concat("!!!"));//+로 해도된다
+        System.out.println("'Java'를 'World'로 대체"+str.replace("Java","World"));
+        System.out.println("첫번쨰 'Java'를 'World'로 대체:"+str.replaceFirst("Java","World"));
+
+
+
+
+
+    }
+}
+========
+package String.method;
+
+public class StringChangeMain2 {
+    public static void main(String[] args) {
+        String strWithSpaces="   Java Programming  ";
+        System.out.println("공백 제거trim:"+strWithSpaces.trim());
+        System.out.println("Strip공백 제거"+strWithSpaces.strip());
+
+        System.out.println("앞부분 공백제거"+strWithSpaces.stripLeading()); //앞에 제거
+        System.out.println("뒷부분 공백제거"+strWithSpaces.stripTrailing());//뒷부분 제거
+
+
+    }
+}
+    
