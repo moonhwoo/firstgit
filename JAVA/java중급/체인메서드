@@ -1,0 +1,39 @@
+package chaining;
+
+public class ValueAdder {
+    private int value;
+
+    public ValueAdder add(int addvalue) {
+        value += addvalue;
+        return this;
+    }
+
+    public int getValue() {
+        return value;
+    }
+}
+=====
+package chaining;
+
+public class MethodChainingMain1 {
+    public static void main(String[] args) {
+        ValueAdder adder = new ValueAdder();
+        adder.add(1);
+        adder.add(2);
+        adder.add(3);
+
+        //반환값 사용
+       /* ValueAdder adder1=adder.add(1);
+        ValueAdder adder2=adder1.add(2);
+        ValueAdder adder3=adder2.add(3);
+
+        //메서드 체인 기법 //반환값이 자기자신 this여서 가능
+        int result=adder.add(1).add(2).add(3).getValue();
+
+        int value=adder.getValue();
+        System.out.println(value);
+      */
+
+
+    }
+}
