@@ -1,0 +1,67 @@
+package Array;
+
+import java.util.Scanner;
+
+public class MountainFound {
+    public int solution(int N,int[][] arr) {
+        int ans=0;
+    //2.0으로 감싸지 않고 경계선 처리를 먼저 해주는것(3중 for문을 통해 방향을 적어둠)(강의 방식)
+        int[] dx={-1,0,1,0};
+        int[] dy={0,1,0,-1};  //이렇게 방향을 미리 정해두면 시계방향으로 돌면서 확인 가능 이러면 4방향말고 대각선 방향할때 더 편함
+
+        for(int i=0;i<N;i++){
+            for(int j=0;j<N;j++){
+                boolean flag=true;
+                for(int k=0;k<4;k++){ //4까지 인 이유-> 위의 위치 값이 4개이므로 동시에 돌림
+                    int ax=i+dx[k];
+                    int ay=j+dy[k];
+                    if(ax>=0 && ax<N && ay>=0 && ay<N  && arr[i][j]<=arr[ax][ay]){ //오류처리를 먼저해줘야 한다 그래야 작동함
+                        flag=false;
+                        break;
+                    }
+                }
+                if(flag){
+                    ans++;
+                }
+            }
+        }
+
+
+
+
+        /*
+       2.주변을 0으로 감싸서 구하는 방법(내가 생각한 구현)
+    int [][]arr0 =new int[N+2][N+2]; // 0으로 갇혀진 배열을 만들기 위해 2개씩 많은 배열 생성
+        for(int i=0;i<N;i++) {
+            for (int j = 0; j < N; j++) {
+                arr0[i+1][j+1] = arr[i][j]; //한칸씩 건너띄어서 채우주면 0으로 가득참
+
+            }
+         } //0으로 찬 배열 생성 완료 이제찾기
+
+        for(int i=1;i<=N;i++) {
+            for (int j = 1; j <= N; j++) {
+                if((arr0[i][j] > arr0[i][j-1]) && (arr0[i][j] > arr0[i][j+1]) && (arr0[i][j] > arr0[i+1][j]) && (arr0[i][j] > arr0[i-1][j])) {
+                    ans++;
+                }
+            }
+        }*/
+        return ans;
+
+    }
+
+    public static class Main {
+        public static void main(String[] args) {
+            MountainFound T=new MountainFound();
+            Scanner sc=new Scanner(System.in);
+            int N=sc.nextInt();
+            int[][] arr=new int[N][N]; //2차 배열 생성
+            for(int i=0;i<N;i++){
+                for(int j=0;j<N;j++){
+                    arr[i][j]=sc.nextInt();
+                }
+            }
+            System.out.println(T.solution(N,arr));
+        }
+    }
+}
