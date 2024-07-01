@@ -1,0 +1,45 @@
+package Array;
+
+import java.util.Scanner;
+
+public class ClassPresident {
+    public int solution(int N,int[][] arr){
+        int ans=0;
+        int max=Integer.MIN_VALUE;
+        for(int i=0;i<N;i++){
+            int cnt=0; // 다른 사람 넘어갈때마다 초기화가 되어야하므로
+            for(int j=0;j<N;j++){ //학년마다 비교해야하므로
+                for(int k=0;k<5;k++){ //k를 학년이랑 생각 i와j를 학생이라 생각
+                    if(arr[i][k]==arr[j][k]){
+                        cnt++; //
+                        break; //여기서 break를 쓰면 이름이 들어가고 다음에 또들어갈 확률이 없어짐
+                    }//여기까지하면 1학년중 같은 학생이 이름이 담겨져있음
+
+                }
+
+
+            } //이제 다음 2번 학생으로 넘어가는데 여기서 문제는 이미 지나친 첫번째 학생수를 비교하느냐이다(즉 앞번호를 비교해서 포함시키느냐가 관건)
+            if(cnt>max){
+                ans=i; //해당 리스트의 크기가 max보다 크면 해당 학생의 이름인 i를 ans에 대입
+                max=cnt; //그런후 최대값을 현재 리스트의 사이즈로 바꿈 이러면 나중에 같은수가 나와도 앞에수로 된다
+
+            }
+        }
+        return ans+1; //리스트 번호가 0부터 시작하므로 +1을 해야지 결과값이 제대로 나옴
+    }
+
+    public static class Main {
+        public static void main(String[] args) {
+            ClassPresident T=new ClassPresident();
+            Scanner sc = new Scanner(System.in);
+            int N= sc.nextInt(); //학생수
+            int[][] arr = new int[N][5];//5학년까지의 기록이므로 열은5
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < 5; j++) {
+                    arr[i][j] = sc.nextInt();
+                }
+            }
+            System.out.println(T.solution(N,arr));
+        }
+    }
+}
