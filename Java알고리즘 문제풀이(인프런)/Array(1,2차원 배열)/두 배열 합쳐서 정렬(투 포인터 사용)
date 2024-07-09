@@ -1,0 +1,43 @@
+package Array;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+//Twopointer 문제!! 정렬의 퀵정렬의 빅오는 nlogn이지만 twopointer를 쓰면 시간 복잡도가n으로 빠르므로 이런문제를 투포인터로 쓸수 있는가를 묻는 문제
+
+public class TwoAddArray {
+    public ArrayList<Integer> solution(int len1, int len2, int[]arr1, int[]arr2){
+        ArrayList<Integer>ans=new ArrayList<>(len1+len2);
+        int p1=0 ,p2=0;
+        while(p1<len1 && p2<len2){ //크기가 작을때까지
+            if(arr1[p1]<arr2[p2]){ans.add(arr1[p1++]);} //후위 연산자를 통해서 코드를 최소화 가능
+            else {ans.add(arr2[p2++]);}
+        }
+        //한쪽이 끝나면 남은 것들을 추가해줘야함
+        while(p1<len1)
+            ans.add(arr1[p1++]);
+        while(p2<len2)
+            ans.add(arr2[p2++]);
+
+
+        return ans;
+    }
+
+    public static class Main {
+        public static void main(String[] args) {
+           TwoAddArray T=new TwoAddArray();
+            Scanner sc = new Scanner(System.in);
+            int len1=sc.nextInt();
+            int[]arr1=new int[len1];
+            for(int i=0;i<len1;i++){
+                arr1[i]=sc.nextInt();
+            }
+            int len2=sc.nextInt();
+            int[] arr2=new int[len2];
+            for(int i=0;i<len2;i++){
+                arr2[i]=sc.nextInt();
+            }
+            for(int x:T.solution(len1,len2,arr1,arr2)){
+            System.out.print(x+" ");}
+        }
+    }
+}
