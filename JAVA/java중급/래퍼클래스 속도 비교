@@ -1,0 +1,37 @@
+package wrapper;
+
+public class WrapperVsPrimitive {
+    public static void main(String[] args) {
+        int iterations=1_000_000_000;
+        long startTime ,endTime;
+
+        long sumPrimitive=0;
+        startTime = System.currentTimeMillis();
+        for(int i=0;i<iterations;i++) {
+            sumPrimitive += i;
+        }
+        endTime = System.currentTimeMillis();
+        System.out.println("sumPrimitive : "+sumPrimitive);
+        System.out.println(endTime - startTime+"ms");
+
+
+        Long sumWrapper=0L;
+        startTime = System.currentTimeMillis();
+        for(int i=0;i<iterations;i++) {
+            sumWrapper += i;
+        }
+        endTime = System.currentTimeMillis();
+        System.out.println("sumPrimitive : "+sumWrapper);
+        System.out.println(endTime - startTime+"ms");
+/*
+결과
+sumPrimitive : 499999999500000000
+438ms
+sumPrimitive : 499999999500000000
+3129ms
+래퍼값이 느림
+=>하지만 이 것은 10억번을 돌렸기 때문이고 조금돌리면 조금밖에 차이가 안남
+결론: 너무 큰 수를 계산하는게 아니라면 간단한것을 쓰는것을 추천
+ */
+    }
+}
