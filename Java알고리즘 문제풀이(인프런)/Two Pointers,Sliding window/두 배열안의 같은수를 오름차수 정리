@@ -1,0 +1,54 @@
+package twopointer;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class CommonNumberRaise {
+    public ArrayList<Integer> solution(int num1, int[] arr1, int num2, int[] arr2){
+        ArrayList<Integer> answer=new ArrayList<>();
+        Arrays.sort(arr1);
+        Arrays.sort(arr2);
+
+        //이중 for문을 쓰면 타임 에러가 뜰거같은 문제이므로 이중포인터 사용!
+        int i=0,j=0;
+
+        while(i<num1 && j<num2){
+            if(arr1[i]==arr2[j]){
+                answer.add(arr1[i]);
+                i++;
+                j++;
+            } 
+            else if(arr1[i]<arr2[j]){ //작은수를 올려줘야함
+                i++;
+            }else j++;
+
+        }
+
+
+        return answer;
+    }
+
+    public static class Main {
+        public static void main(String[] args) {
+            Scanner sc = new Scanner(System.in);
+            CommonNumberRaise T=new CommonNumberRaise();
+            int num1=sc.nextInt();
+            int[] arr1=new int[num1];
+            for(int i=0;i<num1;i++){
+    
+                arr1[i]=sc.nextInt();
+            }
+            int num2=sc.nextInt();
+    
+            int[] arr2=new int[num2];
+    
+            for(int i=0;i<num2;i++){
+                arr2[i]=sc.nextInt();
+            }
+            for(int x:T.solution(num1,arr1,num2,arr2)){
+                System.out.print(x+" ");
+            }
+        }
+    }
+}
