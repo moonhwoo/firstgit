@@ -1,0 +1,52 @@
+package enumeration.ex2;
+//타입안전 열거형
+//이 코드는 좋지만 코드수가 너무 많아서 힘들다 그래서 발명된게=>
+//=>> EnumClass!!
+public class ClassGrade {
+    public static final ClassGrade Basic=new ClassGrade();
+    public static final ClassGrade Gold=new ClassGrade();
+    public static final ClassGrade Diamond=new ClassGrade();
+
+    //private 생성자 추가
+    private ClassGrade() {}
+}
+//
+package enumeration.ex2;
+
+
+public class DiscountService {
+
+    public int discount(ClassGrade classGrade,int price){
+        int discountPercent  = 0;
+
+        if(classGrade==ClassGrade.Basic){
+            discountPercent = 10;
+        } else if (classGrade==ClassGrade.Gold) {
+            discountPercent = 20;
+
+        } else if (classGrade==ClassGrade.Diamond) {
+            discountPercent = 30;
+
+        }else {
+            System.out.println("no discount");
+        }
+        return price * discountPercent / 100;
+    }
+}
+//
+package enumeration.ex2;
+
+
+
+public class StringGradeEx2_1 {
+    public static void main(String[] args) {
+        int price = 10000;
+        DiscountService discountService = new DiscountService();
+        int basic = discountService.discount(ClassGrade.Basic, price);
+        int gold = discountService.discount(ClassGrade.Gold, price);
+        int diamond = discountService.discount(ClassGrade.Diamond, price);
+        System.out.println("BASIC 등급의 할인 금액: " + basic);
+        System.out.println("GOLD 등급의 할인 금액: " + gold);
+        System.out.println("DIAMOND 등급의 할인 금액: " + diamond);
+    }
+}
