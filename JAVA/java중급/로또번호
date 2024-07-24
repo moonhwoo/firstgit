@@ -1,0 +1,45 @@
+package system;
+
+import java.util.Random;
+
+public class LottoGenerator {
+    private int count=0;
+    int[] numbers=new int[6];
+    Random random=new Random();
+public LottoGenerator() {
+    while(count<6) {
+        int number = random.nextInt(45) + 1;
+
+        if (isNotExit(number, numbers)) {
+            numbers[count] = number;
+            count++;
+        }
+    }
+
+    }
+    public boolean isNotExit(int number,int[]numbers){
+        for(int i=0;i<numbers.length;i++){
+            if(numbers[i]==number){
+                return false;
+            }
+
+
+
+        }
+        return true;
+    }
+
+
+    }
+
+    package system;
+
+    public class LottoGeneratorMain {
+        public static void main(String[] args) {
+            LottoGenerator T = new LottoGenerator();
+            for(int x:T.numbers){
+                System.out.print(x+" ");
+            }
+        }
+    }
+    
