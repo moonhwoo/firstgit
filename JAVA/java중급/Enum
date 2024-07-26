@@ -1,0 +1,30 @@
+package enumeration.ex3;
+//class자리 대신에 enum을 쓰면 타입안전 열거형 처럼 길게 안써도 깔끔하게 사용가능
+public enum Grade {
+    Basic,Gold,Diamond
+}
+////////////
+package enumeration.ex3;
+
+
+import static enumeration.ex3.Grade.Basic;
+
+public class DiscountService {
+
+    public int discount(Grade classGrade,int price){
+        int discountPercent  = 0;
+
+        if(classGrade== Basic){ //Grade.Basic을 import를 통해 보기쉽게 바꿔줌
+            discountPercent = 10;
+        } else if (classGrade==Grade.Gold) {
+            discountPercent = 20;
+
+        } else if (classGrade==Grade.Diamond) {
+            discountPercent = 30;
+
+        }else {
+            System.out.println("no discount");
+        }
+        return price * discountPercent / 100;
+    }
+}
