@@ -1,0 +1,47 @@
+//생성자를 이용하면 enum을 쉽게 사용할수있다
+package enumeration.ref2;
+
+public enum Grade {
+    Basic(10),Gold(20),Diamond(30);
+
+    private final int discountPercent;
+
+    Grade(int discountPercent) {  //생성자를 통해 즉시 등급안에 값이 바로 들어감
+        this.discountPercent = discountPercent;
+    }
+
+    public int getDiscountPercent() {
+        return discountPercent;
+    }  
+}
+///
+package enumeration.ref2;
+
+
+
+public class DiscountService {
+
+    public int discount(Grade grade, int price){
+
+        return price * grade.getDiscountPercent() / 100;
+    }
+}
+///
+package enumeration.ref2;
+
+
+
+public class EnumRefMain2 {
+    public static void main(String[] args) {
+        int price=10000;
+
+        DiscountService discountService=new DiscountService();
+        int basic=discountService.discount(Grade.Basic,price);
+        int gold=discountService.discount(Grade.Gold,price);
+        int diamond=discountService.discount(Grade.Diamond,price);
+
+        System.out.println("class Basic= "+ basic);
+        System.out.println("class Gold= "+ gold);
+        System.out.println("class Diamond= "+ diamond);
+    }
+}
