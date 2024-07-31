@@ -7,11 +7,11 @@ public class ContinueSubsequence {
         int sum=0;
         int ans=0;
     for(int rt=0;rt<N;rt++){
-        sum+=arr[rt];
+        sum+=arr[rt];//증가하고 더하고 확인해야 lt-rt합이된다
         if(sum==M){
             ans++;
         }
-        while(sum>=M){
+        while(sum>=M){ //else if쓸 필요없이 바로 쓰기가능! 코드를 줄일수 있음
             sum-=arr[lt++];
             if(sum==M){
                 ans++;
