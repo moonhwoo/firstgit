@@ -1,0 +1,42 @@
+package hashmap;
+
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class ClassPresident {
+    public char solution(int number,String str){
+        char answer=' ';
+        HashMap<Character,Integer> map=new HashMap<>();
+        for(char x:str.toCharArray()){//key값이 x임
+            map.put(x,map.getOrDefault(x,0)+1);//getOrDefault를 통해 만약에 값이 없으면 0을 반환 있으면 x의 value값을 반환 거기다가 1을 더함
+
+        }//여기까지하면 key값에 해당하는 key값들이 각각 들어가 있음
+
+        //=>값이 세팅되었으므로 최대값에 해당하는 key값을 구하면된다
+        int max=Integer.MIN_VALUE;//최솟값 할당
+
+        for(char key:map.keySet()){ //keySet()은 맵에 있는 모든 key값을 가져온다 그래서 for each문 가능
+            if(map.get(key)>max){
+                max=map.get(key);
+                answer=key;
+            }
+        }
+
+
+
+
+        return answer;
+    }
+
+    public static class Main {
+        public static void main(String[] args) {
+            ClassPresident T=new ClassPresident();
+            Scanner sc = new Scanner(System.in);
+            int number = sc.nextInt();
+            String str=sc.next();
+    
+            System.out.println(T.solution(number,str));
+    
+        }
+    }
+}
